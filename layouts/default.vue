@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { api } from '~/middleware/api'
+import { getPokemons } from '~/middleware/pokemon'
 
 export default {
   data() {
@@ -63,17 +63,13 @@ export default {
     async searchPokemon() {
       console.log(this.search)
       if (this.search.length > 3) {
-        const pokemonsFetched = await api.get(`pokemon/?offset=0&limit=1118`)
+        const pokemonsFetched = await getPokemons(this.search)
+        this.pokemons = pokemonsFetched
+        this.$nuxt.$emit('pokemons', pokemonsFetched)
+
         console.log(pokemonsFetched)
-        const pokemonFiltered = pokemonsFetched.data.results.filter(
-          (pokemonFetched) => {
-            return pokemonFetched.name.includes(this.search)
-          }
-        )
-        this.pokemons = pokemonFiltered
-        this.$nuxt.$emit('pokemons', pokemonFiltered)
-        //this.$store.commit('CHANGE_POKEMONS', pokemonFiltered)
-        console.log(pokemonFiltered)
+      } else {
+        this.$nuxt.$emit('pokemons', [])
       }
     },
     updatesearch(event) {
