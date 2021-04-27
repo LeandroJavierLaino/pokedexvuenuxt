@@ -1,15 +1,9 @@
 <template>
-  <v-container>
-    <!-- <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="6"> -->
-    <div class="pokecontainer">
-      <div v-for="pokemon in pokemons" :key="pokemon.name" class="pokecard">
-        <Pokecard :name="pokemon.name"></Pokecard>
-      </div>
+  <div class="pokecontainer">
+    <div v-for="pokemon in pokemons" :key="pokemon.name" class="pokecard">
+      <Pokecard :name="pokemon.name" />
     </div>
-    <!-- </v-col> </v-row
-  >-->
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -35,7 +29,14 @@ export default {
 }
 </script>
 <style>
-.pokecointainer {
+.maincontainer {
+  display: flex;
+  flex: 1;
+  max-width: 1500px;
+}
+
+.pokecontainer {
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

@@ -4,6 +4,7 @@ export type BasicPokemons = {
 }
 
 type Sprites = {
+  // eslint-disable-next-line camelcase
   front_default: string
 }
 
@@ -18,6 +19,7 @@ type Ability = {
 
 type AbilitySlot = {
   ability: Ability
+  // eslint-disable-next-line camelcase
   is_hidden: boolean
   slot: number
 }
@@ -38,6 +40,6 @@ export type PokemonCard = {
   sprites: Sprites
   height?: number
   weight?: number
-  skills?: Skill[]
+  abilities?: Skill[]
   types?: TypeSlot[]
 }

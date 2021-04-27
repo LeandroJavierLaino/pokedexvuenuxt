@@ -1,22 +1,23 @@
 <template>
-  <v-card>
+  <v-card class="card">
     <v-card-title>{{ name }}</v-card-title>
-    <v-card-subtitle>{{ `#${pokemon.id}` }}</v-card-subtitle>
-    <!-- create a class to adjust the pokemon image -->
-    <v-img
-      :v-if="pokemon.sprites != undefined"
-      :src="pokemon.sprites['front_default']"
-      height="750px"
-    ></v-img>
+
+    <div class="imagecontainer">
+      <v-img :src="pokemon.sprites['front_default']" class="image" />
+    </div>
+
     <v-card-actions>
-      <v-btn icon="mdi-badge-account-horizontal-outline">
+      <v-btn icon @click="selectPokemon">
         <v-icon color="secondary">mdi-badge-account-horizontal-outline</v-icon>
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
-<script>
+
+<script lang="ts">
 import { getPokemon } from '~/middleware/pokemon'
+import store from '~/store/store'
+
 export default {
   props: {
     name: {
@@ -41,9 +42,26 @@ export default {
   methods: {
     async fetchPokemon() {
       const fetchingpoke = await getPokemon(this.name)
-      console.log(fetchingpoke)
       this.pokemon = fetchingpoke
+    },
+    selectPokemon() {
+      store.commit('setPokemon', this.name)
+      this.$router.push(`/pokemon/${this.name}`)
     },
   },
 }
 </script>
+
+<style>
+.imagecontainer {
+  height: 380px;
+  width: 380px;
+}
+.image {
+  max-height: 100%;
+  max-width: 100%;
+}
+.card {
+  width: 400px;
+}
+</style>

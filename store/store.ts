@@ -1,10 +1,12 @@
-export const contextstate = () => ({
-  pokemon: '',
-})
+import Vuex from 'vuex'
 
-export const mutations = {
-  // TODO: check types
-  CHANGE_POKEMONS(state: typeof contextstate, pokemon: string) {
-    state.arguments.pokemon = pokemon
+export default new Vuex.Store({
+  state: {
+    pokemon: '',
   },
-}
+  mutations: {
+    setPokemon(state, newPokemon) {
+      state.pokemon = newPokemon
+    },
+  },
+})
