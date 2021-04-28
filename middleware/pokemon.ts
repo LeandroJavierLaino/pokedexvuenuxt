@@ -1,5 +1,5 @@
 import { api } from './api'
-import { BasicPokemons } from '~/types/pokemons'
+import { BasicPokemons, PokemonCard } from '~/types/pokemons'
 
 async function getPokemons(name: string) {
   const pokemonsFetched = await api.get(`pokemon/?offset=0&limit=1118`)
@@ -13,7 +13,7 @@ async function getPokemons(name: string) {
 
 async function getPokemon(name: string) {
   const pokemonFetched = await api.get(`pokemon/${name}`)
-  return pokemonFetched.data
+  return pokemonFetched.data as PokemonCard
 }
 
 export { getPokemons, getPokemon }

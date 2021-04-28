@@ -1,10 +1,18 @@
 <template>
   <div>
+    <v-app-bar color="red darken-2" app>
+      <v-btn icon @click="goBack">
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
+
+      <v-spacer />
+      <v-toolbar-title class="title" v-text="title" />
+    </v-app-bar>
     <Pokedetail :pokemon="pokemon" />
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { getPokemon } from '~/middleware/pokemon'
 import store from '~/store/store'
 import Pokedetail from '~/components/Pokedetail.vue'
@@ -21,14 +29,18 @@ export default {
           front_default: '',
         },
       },
+      title: 'Pokedex',
     }
   },
-  beforeMount() {
-    this.fetchPokemon()
+  created() {
+    this.fetchPokemon().then((result) => (this.pokemon = result))
   },
   methods: {
     async fetchPokemon() {
-      this.pokemon = await getPokemon(store.state.pokemon)
+      return await getPokemon(store.state.pokemon)
+    },
+    goBack() {
+      this.$router.back()
     },
   },
 }

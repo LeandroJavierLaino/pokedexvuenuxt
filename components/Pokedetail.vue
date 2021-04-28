@@ -32,8 +32,9 @@
   </v-card>
 </template>
 
-<script lang="ts">
+<script>
 export default {
+  name: 'Pokedetail',
   props: {
     pokemon: {
       type: Object,

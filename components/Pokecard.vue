@@ -14,7 +14,7 @@
   </v-card>
 </template>
 
-<script lang="ts">
+<script>
 import { getPokemon } from '~/middleware/pokemon'
 import store from '~/store/store'
 
