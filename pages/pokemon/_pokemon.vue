@@ -28,8 +28,8 @@ export default {
         sprites: {
           front_default: '',
         },
+        title: 'Pokedex',
       },
-      title: 'Pokedex',
     }
   },
   created() {
